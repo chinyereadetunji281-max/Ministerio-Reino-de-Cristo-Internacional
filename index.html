@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Ministerio Reino de Cristo Internacional</title>
+  <meta name="description" content="Ministerio Reino de Cristo Internacional — Una comunidad de fe, esperanza, servicio y transformación en Madrid.">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://tailwindcss.com"></script>
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    .hero-bg {
+      background:
+        linear-gradient(90deg, rgba(10, 23, 14, 0.92) 0%, rgba(22, 49, 27, 0.76) 48%, rgba(22, 49, 27, 0.35) 100%),
+        url("https://images.unsplash.com/photo-1504052434569-70ad5836ab65?auto=format&fit=crop&w=2200&q=90")
+        center/cover no-repeat;
+    }
+
+    .glass {
+      background: rgba(255,255,255,.08);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid rgba(255,255,255,.14);
+    }
+
+    .card-hover {
+      transition: transform .3s ease, box-shadow .3s ease, border-color .3s ease;
+    }
+
+    .card-hover:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 25px 55px rgba(20, 45, 24, .12);
+      border-color: rgba(77, 139, 40, .4);
+    }
+
+    .section-label::before {
+      content: "";
+      display: inline-block;
+      width: 35px;
+      height: 2px;
+      background: #5b962f;
+      margin-right: 12px;
+      vertical-align: middle;
+    }
+
+    .green-gradient {
+      background: linear-gradient(135deg, #4f8b2d 0%, #315f20 100%);
+    }
+  </style>
+</head>
+
+<body class="bg-stone-50 text-slate-700">
+
+  <!-- NAVIGATION -->
+  <header class="fixed top-0 left-0 right-0 z-50">
+    <nav class="bg-white/95 backdrop-blur-lg border-b border-slate-200/80 shadow-sm">
+      <div class="max-w-7xl mx-auto px-5 sm:px-8">
+        <div class="h-20 flex items-center justify-between">
+
+          <!-- Logo -->
+          <a href="#inicio" class="flex items-center gap-3 group">
+            <div class="w-11 h-11 rounded-full green-gradient flex items-center justify-center shadow-lg">
+              <i class="fa-solid fa-cross text-white text-lg"></i>
+            </div>
+
+            <div class="leading-tight">
+              <div class="font-extrabold text-slate-800 tracking-tight">
+                Ministerio
+              </div>
+              <div class="text-[#4f8b2d] font-bold text-sm">
+                Reino de Cristo Internacional
+              </div>
+            </div>
+          </a>
+
+          <!-- Desktop menu -->
+          <div class="hidden lg:flex items-center gap-8 text-sm font-semibold">
+            <a href="#inicio" class="text-[#4f8b2d] hover:text-[#315f20] transition">Inicio</a>
+            <a href="#servicios" class="text-slate-600 hover:text-[#4f8b2d] transition">Servicios</a>
+            <a href="#nosotros" class="text-slate-600 hover:text-[#4f8b2d] transition">Nosotros</a>
+            <a href="#testimonios" class="text-slate-600 hover:text-[#4f8b2d] transition">Testimonios</a>
+            <a href="#contacto" class="px-5 py-2.5 rounded-full bg-[#4f8b2d] text-white hover:bg-[#315f20] transition shadow-md">
+              Contáctanos
+            </a>
+          </div>
+
+          <!-- Mobile button -->
+          <button id="menuButton" class="lg:hidden w-11 h-11 rounded-xl border border-slate-200 text-slate-700">
+            <i class="fa-solid fa-bars"></i>
+          </button>
+        </div>
+
+        <!-- Mobile menu -->
+        <div id="mobileMenu" class="hidden lg:hidden pb-5">
+          <div class="flex flex-col gap-2 pt-3">
+            <a href="#inicio" class="px-4 py-3 rounded-xl hover:bg-slate-100">Inicio</a>
+            <a href="#servicios" class="px-4 py-3 rounded-xl hover:bg-slate-100">Servicios</a>
+            <a href="#nosotros" class="px-4 py-3 rounded-xl hover:bg-slate-100">Nosotros</a>
+            <a href="#testimonios" class="px-4 py-3 rounded-xl hover:bg-slate-100">Testimonios</a>
+            <a href="#contacto" class="px-4 py-3 rounded-xl bg-[#4f8b2d] text-white">Contáctanos</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+
+  <!-- HERO -->
+  <main>
+
+    <section id="inicio" class="hero-bg min-h-screen flex items-center pt-20 relative overflow-hidden">
+      <div class="absolute inset-0 bg-black/10"></div>
+
+      <div class="max-w-7xl mx-auto px-5 sm:px-8 w-full relative z-10">
+        <div class="max-w-4xl py-24 lg:py-32">
+
+          <div class="inline-flex items-center gap-2 glass rounded-full px-5 py-2 text-white text-sm font-medium mb-8">
+            <span class="w-2 h-2 bg-lime-400 rounded-full animate-pulse"></span>
+            Una comunidad de fe en Madrid
+          </div>
+
+          <h1 class="text-5xl sm:text-6xl lg:text-8xl font-black text-white leading-[.95] tracking-tight">
+            Un lugar para
+            <span class="text-lime-400">creer, crecer</span>
+            y servir.
+          </h1>
+
+          <p class="mt-8 text-lg sm:text-xl lg:text-2xl text-white/80 leading-relaxed max-w-3xl">
+            Bienvenido al Ministerio Reino de Cristo Internacional.
+            Una familia de fe donde encontrarás esperanza, propósito,
+            comunidad y un espacio para acercarte a Dios.
+          </p>
+
+          <div class="mt-10 flex flex-col sm:flex-row gap-4">
+            <a href="#contacto"
+               class="inline-flex items-center justify-center gap-3 px-7 py-4 rounded-full bg-[#63a536] hover:bg-[#74bb42] text-white font-bold shadow-2xl transition transform hover:-translate-y-1">
+              <i class="fa-solid fa-location-dot"></i>
+              Visítanos
+            </a>
+
+            <a href="#nosotros"
+               class="inline-flex items-center justify-center gap-3 px-7 py-4 rounded-full border border-white/30 bg-white/10 hover:bg-white/20 backdrop-blur text-white font-bold transition">
+              Conócenos
+              <i class="fa-solid fa-arrow-down"></i>
+            </a>
+          </div>
+
+          <div class="mt-12 flex flex-wrap gap-8 text-white/70 text-sm">
+            <div class="flex items-center gap-3">
+              <i class="fa-solid fa-heart text-lime-400"></i>
+              Amor
+            </div>
+            <div class="flex items-center gap-3">
+              <i class="fa-solid fa-book-bible text-lime-400"></i>
+              Palabra
+            </div>
+            <div class="flex items-center gap-3">
+              <i class="fa-solid fa-people-group text-lime-400"></i>
+              Comunidad
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="absolute bottom-8 left-1/2 -translate-x-1/2 text-white/60 animate-bounce">
+        <i class="fa-solid fa-chevron-down"></i>
+      </div>
+    </section>
+
+
+    <!-- SERVICES -->
+    <section id="servicios" class="py-24 lg:py-32 bg-white">
+      <div class="max-w-7xl mx-auto px-5 sm:px-8">
+
+        <div class="max-w-2xl mb-16">
+          <p class="section-label text-[#4f8b2d] font-bold uppercase tracking-[.2em] text-sm mb-4">
+            Nuestra comunidad
+          </p>
+
+          <h2 class="text-4xl sm:text-5xl lg:text-6xl font-black text-slate-900 tracking-tight leading-tight">
+            Hay un lugar para ti.
+          </h2>
+
+          <p class="mt-6 text-lg text-slate-500 leading-relaxed">
+            Creemos que la fe también se vive compartiendo, sirviendo,
+            aprendiendo y caminando juntos. Participa en nuestras
+            actividades y encuentra tu lugar dentro de la comunidad.
+          </p>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+          <article class="card-hover rounded-3xl border border-slate-200 bg-white p-8">
+            <div class="w-14 h-14 rounded-2xl bg-green-50 text-[#4f8b2d] flex items-center justify-center text-xl mb-7">
+              <i class="fa-solid fa-church"></i>
+            </div>
+            <h3 class="text-xl font-bold text-slate-900">Cultos dominicales</h3>
+            <p class="mt-3 text-slate-500 leading-relaxed">
+              Un tiempo para adorar, escuchar la Palabra y compartir como familia de fe.
+            </p>
+            <div class="mt-6 text-sm font-semibold text-[#4f8b2d]">
+              Domingos · 18:00
+            </div>
+          </article>
+
+          <article class="card-hover rounded-3xl border border-slate-200 bg-white p-8">
+            <div class="w-14 h-14 rounded-2xl bg-green-50 text-[#4f8b2d] flex items-center justify-center text-xl mb-7">
+              <i class="fa-solid fa-book-open"></i>
+            </div>
+            <h3 class="text-xl font-bold text-slate-900">Estudios bíblicos</h3>
+            <p class="mt-3 text-slate-500 leading-relaxed">
+              Profundizamos juntos en las Escrituras para comprenderlas y llevarlas a nuestra vida.
+            </p>
+            <div class="mt-6 text-sm font-semibold text-[#4f8b2d]">
+              Miércoles · 19:00
+            </div>
+          </article>
+
+          <article class="card-hover rounded-3xl border border-slate-200 bg-white p-8">
+            <div class="w-14 h-14 rounded-2xl bg-green-50 text-[#4f8b2d] flex items-center justify-center text-xl mb-7">
+              <i class="fa-solid fa-hands-praying"></i>
+            </div>
+            <h3 class="text-xl font-bold text-slate-900">Oración y vigilia</h3>
+            <p class="mt-3 text-slate-500 leading-relaxed">
+              Espacios dedicados a la oración, la reflexión y la búsqueda de la presencia de Dios.
+            </p>
+            <div class="mt-6 text-sm font-semibold text-[#4f8b2d]">
+              Viernes · 19:00
+            </div>
+          </article>
+
+          <article class="card-hover rounded-3xl border border-slate-200 bg-white p-8">
+            <div class="w-14 h-14 rounded-2xl bg-green-50 text-[#4f8b2d] flex items-center justify-center text-xl mb-7">
+              <i class="fa-solid fa-children"></i>
+            </div>
+            <h3 class="text-xl font-bold text-slate-900">Servicio de jóvenes</h3>
+            <p class="mt-3 text-slate-500 leading-relaxed">
+              Un espacio para que los jóvenes crezcan en la fe, formen amistades y descubran su propósito.
+            </p>
+            <div class="mt-6 text-sm font-semibold text-[#4f8b2d]">
+              Actividades mensuales
+            </div>
+          </article>
+
+          <article class="card-hover rounded-3xl border border-slate-200 bg-white p-8">
+            <div class="w-14 h-14 rounded-2xl bg-green-50 text-[#4f8b2d] flex items-center justify-center text-xl mb-7">
+              <i class="fa-solid fa-hand-holding-heart"></i>
+            </div>
+            <h3 class="text-xl font-bold text-slate-900">Voluntariado</h3>
+            <p class="mt-3 text-slate-500 leading-relaxed">
+              Sirve a los demás, comparte tus talentos y participa activamente en nuestra misión.
+            </p>
+            <div class="mt-6 text-sm font-semibold text-[#4f8b2d]">
+              Únete al equipo
+            </div>
+          </article>
+
+          <article class="card-hover rounded-3xl border border-slate-200 bg-white p-8">
+            <div class="w-14 h-14 rounded-2xl bg-green-50 text-[#4f8b2d] flex items-center justify-center text-xl mb-7">
+              <i class="fa-solid fa-people-roof"></i>
+            </div>
+            <h3 class="text-xl font-bold text-slate-900">Consejería pastoral</h3>
+            <p class="mt-3 text-slate-500 leading-relaxed">
+              Acompañamiento personal y espiritual para quienes atraviesan momentos importantes de su vida.
+            </p>
+            <div class="mt-6 text-sm font-semibold text-[#4f8b2d]">
+              Atención personalizada
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ABOUT -->
+    <section id="nosotros" class="py-24 lg:py-32 bg-stone-100">
+      <div class="max-w-7xl mx-auto px-5 sm:px-8">
+
+        <div class="grid lg:grid-cols-2 gap-14 lg:gap-24 items-center">
+
+          <!-- Text -->
+          <div>
+            <p class="section-label text-[#4f8b2d] font-bold uppercase tracking-[.2em] text-sm mb-4">
+              Nuestra historia
+            </p>
+
+            <h2 class="text-4xl sm:text-5xl font-black text-slate-900 tracking-tight leading-tight">
+              Una familia unida por la fe y el amor.
+            </h2>
+
+            <p class="mt-7 text-lg text-slate-600 leading-relaxed">
+              Ministerio Reino de Cristo Internacional nace del deseo
+              de compartir el amor de Dios con personas de diferentes
+              historias, culturas y circunstancias.
+            </p>
+
+            <p class="mt-5 text-lg text-slate-600 leading-relaxed">
+              Creemos en una iglesia cercana, acogedora y activa,
+              donde cada persona pueda sentirse escuchada, descubrir
+              sus dones y crecer espiritualmente.
+            </p>
+
+            <div class="mt-9 grid sm:grid-cols-2 gap-5">
+              <div class="flex gap-4">
+                <div class="text-[#4f8b2d] text-xl">
+                  <i class="fa-solid fa-heart"></i>
+                </div>
+                <div>
+                  <h3 class="font-bold text-slate-900">Amor</h3>
+                  <p class="text-sm text-slate-500 mt-1">
+                    Servimos desde el amor y la compasión.
+                  </p>
+                </div>
+              </div>
+
+              <div class="flex gap-4">
+                <div class="text-[#4f8b2d] text-xl">
+                  <i class="fa-solid fa-seedling"></i>
+                </div>
+                <div>
+                  <h3 class="font-bold text-slate-900">Crecimiento</h3>
+                  <p class="text-sm text-slate-500 mt-1">
+                    Crecemos juntos en nuestra fe.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <a href="#contacto"
+               class="inline-flex items-center gap-3 mt-10 px-6 py-3.5 rounded-full bg-slate-900 text-white font-bold hover:bg-[#4f8b2d] transition">
+              Conoce nuestra comunidad
+              <i class="fa-solid fa-arrow-right"></i>
+            </a>
+          </div>
+
+          <!-- Image -->
+          <div class="relative">
+            <div class="absolute -inset-5 bg-[#4f8b2d]/10 rounded-[2.5rem] rotate-3"></div>
+
+            <div class="relative overflow-hidden rounded-[2rem] shadow-2xl">
+              <img
+                src="https://images.unsplash.com/photo-1515169067868-5387ec356754?auto=format&fit=crop&w=1200&q=90"
+                alt="Comunidad reunida en un momento de adoración"
+                class="w-full h-[520px] object-cover">
+            </div>
+
+            <div class="absolute -bottom-7 -left-5 sm:-left-8 bg-white rounded-2xl shadow-xl p-5 max-w-xs">
+              <div class="flex items-center gap-4">
+                <div class="w-12 h-12 rounded-full bg-[#4f8b2d] text-white flex items-center justify-center">
+                  <i class="fa-solid fa-cross"></i>
+                </div>
+                <div>
+                  <p class="font-bold text-slate-900">Una nueva oportunidad</p>
+                  <p class="text-sm text-slate-500">Siempre hay esperanza.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+
+    <!-- VERSE / CTA -->
+    <section class="py-24 bg-[#315f20] relative overflow-hidden">
+      <div class="absolute inset-0 opacity-10">
+        <i class="fa-solid fa-cross absolute text-[25rem] -right-10 -top-24 text-white"></i>
+      </div>
+
+      <div class="max-w-4xl mx-auto px-5 text-center relative">
+        <i class="fa-solid fa-quote-left text-lime-300 text-3xl mb-7"></i>
+
+        <blockquote class="text-3xl sm:text-4xl lg:text-5xl font-black text-white leading-tight">
+          “Porque donde están dos o tres congregados en mi nombre,
+          allí estoy yo en medio de ellos.”
+        </blockquote>
+
+        <p class="mt-6 text-lime-200 font-semibold">
+          Mateo 18:20
+        </p>
+      </div>
+    </section>
+
+
+    <!-- TESTIMONIALS -->
+    <section id="testimonios" class="py-24 lg:py-32 bg-white">
+      <div class="max-w-7xl mx-auto px-5 sm:px-8">
+
+        <div class="text-center max-w-2xl mx-auto mb-16">
+          <p class="section-label text-[#4f8b2d] font-bold uppercase tracking-[.2em] text-sm mb-4">
+            Historias reales
+          </p>
+
+          <h2 class="text-4xl sm:text-5xl font-black text-slate-900">
+            Dios transforma vidas.
+          </h2>
+
+          <p class="mt-5 text-lg text-slate-500">
+            Estas son algunas de las historias compartidas por personas
+            que han encontrado esperanza y una nueva dirección.
+          </p>
+        </div>
+
+        <div class="grid lg:grid-cols-3 gap-6">
+
+          <article class="rounded-3xl bg-stone-50 border border-slate-100 p-8">
+            <div class="flex gap-1 text-yellow-500 mb-6">
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+            </div>
+
+            <p class="text-slate-600 leading-relaxed italic">
+              “Durante un momento muy difícil de mi vida sentí que había
+              perdido toda esperanza. Encontrar una comunidad que me
+              escuchara y orara conmigo cambió mi manera de afrontar
+              las cosas.”
+            </p>
+
+            <div class="mt-7 flex items-center gap-3">
+              <div class="w-11 h-11 rounded-full bg-[#4f8b2d] text-white flex items-center justify-center font-bold">
+                C
+              </div>
+              <div>
+                <p class="font-bold text-slate-900">Carlos</p>
+                <p class="text-sm text-slate-500">Miembro de la comunidad</p>
+              </div>
+            </div>
+          </article>
+
+          <article class="rounded-3xl bg-stone-50 border border-slate-100 p-8">
+            <div class="flex gap-1 text-yellow-500 mb-6">
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+            </div>
+
+            <p class="text-slate-600 leading-relaxed italic">
+              “Aquí encontré personas que me acompañaron, me animaron
+              y me ayudaron a volver a acercarme a Dios. Hoy puedo
+              mirar mi futuro con mucha más esperanza.”
+            </p>
+
+            <div class="mt-7 flex items-center gap-3">
+              <div class="w-11 h-11 rounded-full bg-[#4f8b2d] text-white flex items-center justify-center font-bold">
+                G
+              </div>
+              <div>
+                <p class="font-bold text-slate-900">Gladys</p>
+                <p class="text-sm text-slate-500">Miembro de la comunidad</p>
+              </div>
+            </div>
+          </article>
+
+          <article class="rounded-3xl bg-stone-50 border border-slate-100 p-8">
+            <div class="flex gap-1 text-yellow-500 mb-6">
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+            </div>
+
+            <p class="text-slate-600 leading-relaxed italic">
+              “Llegué buscando respuestas y encontré una familia.
+              Desde entonces mi relación con Dios ha cambiado
+              profundamente y he aprendido que nunca tenemos que
+              caminar solos.”
+            </p>
+
+            <div class="mt-7 flex items-center gap-3">
+              <div class="w-11 h-11 rounded-full bg-[#4f8b2d] text-white flex items-center justify-center font-bold">
+                A
+              </div>
+              <div>
+                <p class="font-bold text-slate-900">Anónimo</p>
+                <p class="text-sm text-slate-500">Miembro de la comunidad</p>
+              </div>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+
+    <!-- CONTACT -->
+    <section id="contacto" class="py-24 lg:py-32 bg-slate-950">
+      <div class="max-w-7xl mx-auto px-5 sm:px-8">
+
+        <div class="grid lg:grid-cols-2 gap-16">
+
+          <!-- Contact information -->
+          <div>
+            <p class="text-lime-400 font-bold uppercase tracking-[.2em] text-sm mb-4">
+              Estamos aquí para ti
+            </p>
+
+            <h2 class="text-4xl sm:text-5xl font-black text-white leading-tight">
+              Ven a conocernos.
+            </h2>
+
+            <p class="mt-6 text-lg text-slate-400 leading-relaxed max-w-xl">
+              Si tienes preguntas, quieres conocer nuestros horarios,
+              necesitas acompañamiento espiritual o simplemente quieres
+              visitarnos, estaremos encantados de recibirte.
+            </p>
+
+            <div class="mt-10 space-y-7">
+
+              <div class="flex items-start gap-5">
+                <div class="w-12 h-12 rounded-xl bg-white/10 text-lime-400 flex items-center justify-center shrink-0">
+                  <i class="fa-solid fa-location-dot"></i>
+                </div>
+                <div>
+                  <p class="text-white font-bold">Nuestra ubicación</p>
+                  <p class="text-slate-400 mt-1">
+                    Madrid, España
+                  </p>
+                </div>
+              </div>
+
+              <div class="flex items-start gap-5">
+                <div class="w-12 h-12 rounded-xl bg-white/10 text-lime-400 flex items-center justify-center shrink-0">
+                  <i class="fa-solid fa-phone"></i>
+                </div>
+                <div>
+                  <p class="text-white font-bold">Teléfono</p>
+                  <a href="tel:+34631545497" class="text-slate-400 hover:text-lime-400 mt-1 block transition">
+                    +34 631 54 54 97
+                  </a>
+                </div>
+              </div>
+
+              <div class="flex items-start gap-5">
+                <div class="w-12 h-12 rounded-xl bg-white/10 text-lime-400 flex items-center justify-center shrink-0">
+                  <i class="fa-solid fa-clock"></i>
+                </div>
+                <div>
+                  <p class="text-white font-bold">Horarios</p>
+                  <p class="text-slate-400 mt-1">
+                    Oración · Viernes 19:00<br>
+                    Culto · Domingo 18:00
+                  </p>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- Social -->
+            <div class="mt-10 pt-8 border-t border-white/10">
+              <p class="text-white font-semibold mb-4">Síguenos</p>
+
+              <div class="flex gap-3">
+                <a href="#" aria-label="Facebook"
+                   class="w-11 h-11 rounded-full bg-white/10 hover:bg-[#4f8b2d] text-white flex items-center justify-center transition">
+                  <i class="fa-brands fa-facebook-f"></i>
+                </a>
+
+                <a href="#" aria-label="Instagram"
+                   class="w-11 h-11 rounded-full bg-white/10 hover:bg-[#4f8b2d] text-white flex items-center justify-center transition">
+                  <i class="fa-brands fa-instagram"></i>
+                </a>
+
+                <a href="#" aria-label="YouTube"
+                   class="w-11 h-11 rounded-full bg-white/10 hover:bg-[#4f8b2d] text-white flex items-center justify-center transition">
+                  <i class="fa-brands fa-youtube"></i>
+                </a>
+
+                <a href="#" aria-label="WhatsApp"
+                   class="w-11 h-11 rounded-full bg-white/10 hover:bg-[#4f8b2d] text-white flex items-center justify-center transition">
+                  <i class="fa-brands fa-whatsapp"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+
+
+          <!-- Form -->
+          <div class="bg-white rounded-[2rem] p-7 sm:p-10 shadow-2xl">
+
+            <div class="mb-8">
+              <h3 class="text-2xl font-black text-slate-900">
+                Escríbenos
+              </h3>
+              <p class="text-slate-500 mt-2">
+                Cuéntanos cómo podemos ayudarte.
+              </p>
+            </div>
+
+            <form id="contactForm" class="space-y-5">
+
+              <div>
+                <label for="name" class="block text-sm font-bold text-slate-700 mb-2">
+                  Nombre
+                </label>
+
+                <div class="relative">
+                  <i class="fa-regular fa-user absolute left-4 top-1/2 -translate-y-1/2 text-slate-400"></i>
+
+                  <input
+                    id="name"
+                    name="name"
+                    type="text"
+                    required
+                    placeholder="Tu nombre"
+                    class="w-full pl-11 pr-4 py-3.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-[#4f8b2d]/30 focus:border-[#4f8b2d] transition">
+                </div>
+              </div>
+
+              <div>
+                <label for="email" class="block text-sm font-bold text-slate-700 mb-2">
+                  Email
+                </label>
+
+                <div class="relative">
+                  <i class="fa-regular fa-envelope absolute left-4 top-1/2 -translate-y-1/2 text-slate-400"></i>
+
+                  <input
+                    id="email"
+                    name="email"
+                    type="email"
+                    required
+                    placeholder="tu@email.com"
+                    class="w-full pl-11 pr-4 py-3.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-[#4f8b2d]/30 focus:border-[#4f8b2d] transition">
+                </div>
+              </div>
+
+              <div>
+                <label for="message" class="block text-sm font-bold text-slate-700 mb-2">
+                  Mensaje
+                </label>
+
+                <textarea
+                  id="message"
+                  name="message"
+                  rows="5"
+                  required
+                  placeholder="¿En qué podemos ayudarte?"
+                  class="w-full px-4 py-3.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-[#4f8b2d]/30 focus:border-[#4f8b2d] transition resize-none"></textarea>
+              </div>
+
+              <button
+                type="submit"
+                class="w-full py-4 rounded-xl bg-[#4f8b2d] hover:bg-[#315f20] text-white font-bold transition shadow-lg flex items-center justify-center gap-3">
+                Enviar mensaje
+                <i class="fa-solid fa-paper-plane"></i>
+              </button>
+
+              <p id="formMessage" class="hidden text-center text-sm font-semibold text-[#4f8b2d]">
+                Gracias por escribirnos. Nos pondremos en contacto contigo.
+              </p>
+
+            </form>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+
+  <!-- FOOTER -->
+  <footer class="bg-black text-slate-500">
+    <div class="max-w-7xl mx-auto px-5 sm:px-8 py-10">
+
+      <div class="flex flex-col md:flex-row items-center justify-between gap-5">
+
+        <div class="flex items-center gap-3">
+          <div class="w-9 h-9 rounded-full bg-[#4f8b2d] flex items-center justify-center">
+            <i class="fa-solid fa-cross text-white text-sm"></i>
+          </div>
+
+          <div>
+            <p class="text-white font-bold">
+              Ministerio Reino de Cristo Internacional
+            </p>
+            <p class="text-xs mt-1">
+              Una comunidad de fe, esperanza y amor.
+            </p>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-5 text-sm">
+          <a href="#inicio" class="hover:text-white transition">Inicio</a>
+          <a href="#servicios" class="hover:text-white transition">Servicios</a>
+          <a href="#contacto" class="hover:text-white transition">Contacto</a>
+        </div>
+
+      </div>
+
+      <div class="mt-8 pt-6 border-t border-white/10 text-center text-xs">
+        © <span id="year"></span> Ministerio Reino de Cristo Internacional. Todos los derechos reservados.
+      </div>
+
+    </div>
+  </footer>
+
+
+  <!-- JAVASCRIPT -->
+  <script>
+    // Mobile menu
+    const menuButton = document.getElementById("menuButton");
+    const mobileMenu = document.getElementById("mobileMenu");
+
+    menuButton.addEventListener("click", () => {
+      mobileMenu.classList.toggle("hidden");
+
+      const icon = menuButton.querySelector("i");
+
+      if (mobileMenu.classList.contains("hidden")) {
+        icon.className = "fa-solid fa-bars";
+      } else {
+        icon.className = "fa-solid fa-xmark";
+      }
+    });
+
+    // Close mobile menu after clicking a link
+    document.querySelectorAll("#mobileMenu a").forEach(link => {
+      link.addEventListener("click", () => {
+        mobileMenu.classList.add("hidden");
+        menuButton.querySelector("i").className = "fa-solid fa-bars";
+      });
+    });
+
+    // Contact form visual feedback
+    document.getElementById("contactForm").addEventListener("submit", function(event) {
+      event.preventDefault();
+
+      const message = document.getElementById("formMessage");
+      message.classList.remove("hidden");
+
+      this.reset();
+    });
+
+    // Current year
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+
+</body>
+</html>
