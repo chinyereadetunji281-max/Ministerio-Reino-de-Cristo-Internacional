@@ -1,38 +1,1356 @@
-from pathlib import Path
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-src = Path("/mnt/data/ministerio_reino_cristo_actualizado.html")
-html = src.read_text(encoding="utf-8")
+<title>Ministerio Reino de Cristo Internacional</title>
 
-# Remove the two Nigeria sede cards from the locations grid.
-start = html.find('      <div class="rounded-3xl bg-white/5 border border-white/10 p-8">\n        <div class="w-12 h-12 rounded-2xl bg-white/5 text-lime-400 flex items-center justify-center mb-6"><i class="fa-solid fa-earth-africa"></i></div>\n        <h3 class="font-display text-2xl mb-4">Nigeria · Sede 1</h3>')
-if start != -1:
-    end = html.find('      </div>', start)
-    end = html.find('      </div>', end + 1) if end != -1 else -1
-    # The card's first closing div is the inner icon; locate card close using the known next card.
-    marker = '      <div class="rounded-3xl bg-white/5 border border-white/10 p-8">\n        <div class="w-12 h-12 rounded-2xl bg-white/5 text-lime-400 flex items-center justify-center mb-6"><i class="fa-solid fa-earth-africa"></i></div>\n        <h3 class="font-display text-2xl mb-4">Nigeria · Sede 2</h3>'
-    second = html.find(marker, start)
-    if second != -1:
-        html = html[:start] + html[second:]
-        # Remove the second card now at start (same structure, ending before map).
-        map_marker = '    </div>\n    <div class="mt-8 rounded-3xl overflow-hidden border border-white/10 shadow-2xl">'
-        second_end = html.find(map_marker, start)
-        if second_end != -1:
-            # Keep the grid closing div and map section, remove card before grid close.
-            card_block = html[start:second_end]
-            # Find last card closing sequence.
-            card_close = card_block.rfind('      </div>')
-            if card_close != -1:
-                html = html[:start] + html[start:second_end][card_close+len('      </div>'):] + html[second_end:]
-# Safer cleanup if any Nigeria references remain in visible location section.
-import re
-html = re.sub(r'\n\s*<div class="rounded-3xl bg-white/5 border border-white/10 p-8">\s*<div class="w-12 h-12 rounded-2xl bg-white/5 text-lime-400 flex items-center justify-center mb-6"><i class="fa-solid fa-earth-africa"></i></div>\s*<h3 class="font-display text-2xl mb-4">Nigeria · Sede [12]</h3>.*?</div>\s*(?=\n\s*</div>\s*\n\s*<div class="mt-8 rounded-3xl)', '', html, flags=re.S)
+<meta name="description" content="Ministerio Reino de Cristo Internacional, iglesia cristiana protestante evangélica en Usera, Madrid. Todos son bienvenidos.">
 
-# Change introductory copy so the website no longer mentions Nigeria.
-html = html.replace("Contamos con presencia en Madrid y dos sedes en Nigeria, unidos por la misma fe en Jesucristo.",
-                    "Nuestra comunidad en Madrid está unida por la misma fe en Jesucristo.")
-html = html.replace("Está presente en España y Nigeria.", "Tiene su sede en Madrid, España.")
-html = html.replace("España y Nigeria", "Madrid, España")
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-out = Path("/mnt/data/ministerio_reino_cristo_solo_madrid.html")
-out.write_text(html, encoding="utf-8")
-print(out)
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<script src="https://cdn.tailwindcss.com"></script>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        ink: '#0A0F1A'
+      },
+      fontFamily: {
+        display: ['Fraunces', 'serif'],
+        body: ['Inter', 'sans-serif']
+      },
+      boxShadow: {
+        glow: '0 20px 60px -15px rgba(79,139,45,0.45)',
+        soft: '0 10px 40px -12px rgba(15,23,42,0.12)'
+      }
+    }
+  }
+}
+</script>
+
+<style>
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+}
+
+h1, h2, h3, .font-display {
+  font-family: 'Fraunces', serif;
+}
+
+::selection {
+  background: #4f8b2d;
+  color: white;
+}
+
+.hero-bg {
+  background:
+  linear-gradient(
+    100deg,
+    rgba(6,15,9,.94) 0%,
+    rgba(10,30,14,.82) 45%,
+    rgba(20,49,24,.55) 100%
+  ),
+  url("https://images.unsplash.com/photo-1504052434569-70ad5836ab65?auto=format&fit=crop&w=2200&q=90")
+  center/cover no-repeat;
+}
+
+.glass {
+  background: rgba(255,255,255,.08);
+  backdrop-filter: blur(14px);
+  border: 1px solid rgba(255,255,255,.14);
+}
+
+.grad-text {
+  background: linear-gradient(
+    100deg,
+    #a3e635 0%,
+    #4f8b2d 55%,
+    #d9b46e 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.card-hover {
+  transition:
+    transform .3s ease,
+    box-shadow .3s ease,
+    border-color .3s ease,
+    background-color .3s ease;
+}
+
+@keyframes floatSlow {
+  0%,100% {
+    transform: translateY(0) rotate(0deg);
+  }
+
+  50% {
+    transform: translateY(-18px) rotate(2deg);
+  }
+}
+
+.float-slow {
+  animation: floatSlow 9s ease-in-out infinite;
+}
+
+</style>
+</head>
+
+
+<body class="bg-white text-slate-900 antialiased">
+
+
+<!-- =========================
+     HEADER
+========================= -->
+
+<header class="fixed top-4 sm:top-6 left-0 right-0 z-50 px-4 sm:px-6">
+
+<nav class="max-w-6xl mx-auto flex items-center justify-between gap-4
+backdrop-blur-md bg-white/70 border border-white/60 shadow-soft
+rounded-full px-4 sm:px-6 py-2.5">
+
+<a href="#inicio" class="flex items-center gap-3">
+
+<!-- LOGO -->
+<img
+src="LOGO_AQUI.png"
+alt="Ministerio Reino de Cristo Internacional"
+class="w-10 h-10 object-contain rounded-full"
+>
+
+<div class="leading-tight hidden sm:block">
+
+<div class="font-display font-semibold text-slate-900 text-[15px]">
+MINISTERIO
+</div>
+
+<div class="text-[#4f8b2d] font-semibold text-[11px] tracking-wide">
+REINO DE CRISTO INTERNACIONAL
+</div>
+
+</div>
+
+</a>
+
+
+<div class="hidden lg:flex items-center gap-7 text-sm font-medium text-slate-600">
+
+<a href="#inicio" class="hover:text-[#4f8b2d] transition">
+Inicio
+</a>
+
+<a href="#sobre-nosotros" class="hover:text-[#4f8b2d] transition">
+Sobre Nosotros
+</a>
+
+<a href="#creencias" class="hover:text-[#4f8b2d] transition">
+Creencias
+</a>
+
+<a href="#reuniones" class="hover:text-[#4f8b2d] transition">
+Reuniones
+</a>
+
+<a href="#testimonios" class="hover:text-[#4f8b2d] transition">
+Testimonios
+</a>
+
+<a href="#ubicacion" class="hover:text-[#4f8b2d] transition">
+Visítanos
+</a>
+
+</div>
+
+
+<a
+href="#ubicacion"
+class="shrink-0 text-sm font-semibold bg-slate-900 text-white
+px-5 py-2.5 rounded-full hover:bg-[#4f8b2d] transition"
+>
+Únete hoy
+</a>
+
+</nav>
+
+</header>
+
+
+
+<!-- =========================
+     HERO
+========================= -->
+
+<section
+id="inicio"
+class="relative hero-bg min-h-screen flex items-center pt-32 pb-24 overflow-hidden"
+>
+
+<div class="max-w-7xl mx-auto px-5 sm:px-8 w-full relative z-10">
+
+<div class="max-w-4xl py-16 lg:py-24">
+
+
+<div class="inline-flex items-center gap-2 glass rounded-full px-5 py-2 text-white text-sm font-medium mb-8">
+
+<span class="w-2 h-2 bg-lime-400 rounded-full animate-pulse"></span>
+
+Una comunidad de fe
+
+</div>
+
+
+<h1 class="font-display text-4xl sm:text-5xl lg:text-6xl
+font-normal text-white leading-tight">
+
+Bienvenido a
+
+<span class="italic grad-text">
+Ministerio Reino de Cristo Internacional
+</span>
+
+</h1>
+
+
+<p class="mt-8 text-lg sm:text-xl text-white/80
+leading-relaxed max-w-2xl font-light">
+
+Dios te está esperando con los brazos abiertos.
+
+No importa cuál sea tu pasado, los errores que hayas cometido
+o las circunstancias que estés viviendo.
+
+Dios te ama profundamente y ha enviado a su Hijo Jesucristo
+para morir por nosotros y ofrecernos salvación, esperanza
+y una nueva vida.
+
+</p>
+
+
+<div class="mt-10 flex flex-col sm:flex-row gap-4">
+
+<a
+href="#reuniones"
+class="inline-flex items-center justify-center gap-3
+px-8 py-4 rounded-full
+bg-gradient-to-r from-lime-500 via-emerald-600 to-teal-700
+text-white font-bold shadow-xl hover:scale-105 transition"
+>
+
+Ver reuniones
+
+</a>
+
+
+<a
+href="#ubicacion"
+class="inline-flex items-center justify-center gap-3
+px-8 py-4 rounded-full border border-white/25
+bg-white/10 backdrop-blur text-white font-bold
+hover:bg-white/20 transition"
+>
+
+Cómo llegar
+
+<i class="fa-solid fa-location-dot"></i>
+
+</a>
+
+</div>
+
+
+<div class="mt-14 flex flex-wrap gap-x-10 gap-y-4
+text-white/70 text-sm border-t border-white/10 pt-8">
+
+<div class="flex items-center gap-3">
+
+<i class="fa-solid fa-heart text-lime-400"></i>
+
+Amor
+
+</div>
+
+
+<div class="flex items-center gap-3">
+
+<i class="fa-solid fa-book-bible text-lime-400"></i>
+
+Palabra de Dios
+
+</div>
+
+
+<div class="flex items-center gap-3">
+
+<i class="fa-solid fa-church text-lime-400"></i>
+
+Una familia de fe
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- =========================
+     CARDS
+========================= -->
+
+<section class="bg-white py-24 sm:py-28">
+
+<div class="max-w-6xl mx-auto px-6">
+
+<div class="grid md:grid-cols-3 gap-8">
+
+
+<div class="group p-8 rounded-3xl border border-slate-100
+hover:border-emerald-200 hover:shadow-soft transition">
+
+<div class="w-12 h-12 rounded-2xl bg-emerald-50
+flex items-center justify-center mb-6">
+
+<i class="fa-solid fa-heart text-emerald-600"></i>
+
+</div>
+
+<h3 class="font-display text-xl mb-3">
+Fe que se vive
+</h3>
+
+<p class="text-slate-500 leading-relaxed text-[15px]">
+
+Creemos en una fe cercana y real, basada en la Palabra
+de Dios y en el amor de Jesucristo.
+
+</p>
+
+</div>
+
+
+
+<div class="group p-8 rounded-3xl border border-slate-100
+hover:border-teal-200 hover:shadow-soft transition">
+
+<div class="w-12 h-12 rounded-2xl bg-teal-50
+flex items-center justify-center mb-6">
+
+<i class="fa-solid fa-people-group text-teal-600"></i>
+
+</div>
+
+<h3 class="font-display text-xl mb-3">
+Una familia
+</h3>
+
+<p class="text-slate-500 leading-relaxed text-[15px]">
+
+Todas las personas son bienvenidas.
+
+Queremos que encuentres un lugar donde puedas conocer
+a Dios y crecer en comunidad.
+
+</p>
+
+</div>
+
+
+
+<div class="group p-8 rounded-3xl border border-slate-100
+hover:border-amber-200 hover:shadow-soft transition">
+
+<div class="w-12 h-12 rounded-2xl bg-amber-50
+flex items-center justify-center mb-6">
+
+<i class="fa-solid fa-cross text-amber-600"></i>
+
+</div>
+
+<h3 class="font-display text-xl mb-3">
+Esperanza en Cristo
+</h3>
+
+<p class="text-slate-500 leading-relaxed text-[15px]">
+
+Creemos que en Jesucristo encontramos perdón,
+esperanza y una nueva oportunidad.
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- =========================
+     SOBRE NOSOTROS
+========================= -->
+
+<section
+id="sobre-nosotros"
+class="py-24 lg:py-32 bg-white"
+>
+
+<div class="max-w-7xl mx-auto px-5 sm:px-8">
+
+<div class="grid lg:grid-cols-2 gap-14 lg:gap-24 items-center">
+
+
+<div>
+
+<p class="text-[#4f8b2d] font-bold uppercase tracking-[.2em] text-sm mb-4">
+
+SOBRE NOSOTROS
+
+</p>
+
+
+<h2 class="font-display text-4xl sm:text-5xl
+font-normal text-slate-900 leading-tight">
+
+Una iglesia para todos.
+
+</h2>
+
+
+<p class="mt-7 text-lg text-slate-600 leading-relaxed">
+
+Ministerio Reino de Cristo Internacional es una iglesia
+cristiana protestante evangélica que busca compartir
+el amor de Dios y el mensaje de Jesucristo con personas
+de todas las edades y circunstancias.
+
+</p>
+
+
+<p class="mt-5 text-lg text-slate-600 leading-relaxed">
+
+Nuestra puerta está abierta para todos.
+
+Creemos que el pasado de una persona no determina
+su futuro y que, por medio de Cristo, siempre existe
+esperanza, perdón y una nueva oportunidad.
+
+</p>
+
+
+<a
+href="#creencias"
+class="inline-flex items-center gap-3 mt-10 px-7 py-3.5
+rounded-full bg-slate-900 text-white font-bold
+hover:bg-[#4f8b2d] transition"
+>
+
+Conoce nuestras creencias
+
+<i class="fa-solid fa-arrow-right"></i>
+
+</a>
+
+</div>
+
+
+
+<div class="relative">
+
+<div class="absolute -inset-5 bg-[#4f8b2d]/10
+rounded-[2.5rem] rotate-3">
+</div>
+
+
+<div class="relative overflow-hidden rounded-[2rem]
+shadow-2xl bg-slate-950 p-10 sm:p-14
+flex items-center justify-center min-h-[430px]">
+
+<!-- LOGO GRANDE -->
+<img
+src="LOGO_AQUI.png"
+alt="Logo oficial del Ministerio Reino de Cristo Internacional"
+class="relative z-10 w-full max-w-[360px] object-contain drop-shadow-2xl"
+>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- =========================
+     CREENCIAS
+========================= -->
+
+<section
+id="creencias"
+class="py-24 lg:py-32 bg-slate-950 text-white"
+>
+
+<div class="max-w-5xl mx-auto px-5 sm:px-8">
+
+
+<p class="text-lime-400 font-bold uppercase tracking-[.2em]
+text-sm mb-4 text-center">
+
+NUESTRAS CREENCIAS
+
+</p>
+
+
+<h2 class="font-display text-4xl sm:text-5xl
+font-normal text-center">
+
+Nuestra fe está centrada en Jesucristo.
+
+</h2>
+
+
+<div class="mt-14 grid md:grid-cols-2 gap-8">
+
+
+<div class="rounded-3xl bg-white/5 border border-white/10 p-9">
+
+<h3 class="font-display text-2xl font-semibold mb-4">
+Creemos
+</h3>
+
+
+<ul class="space-y-4 text-slate-300 leading-relaxed">
+
+<li>
+<i class="fa-solid fa-check text-lime-400 mr-2"></i>
+En Dios y en su amor por toda la humanidad.
+</li>
+
+<li>
+<i class="fa-solid fa-check text-lime-400 mr-2"></i>
+En Jesucristo, el Hijo de Dios, que murió por nuestros
+pecados y resucitó.
+</li>
+
+<li>
+<i class="fa-solid fa-check text-lime-400 mr-2"></i>
+En la Biblia como Palabra de Dios.
+</li>
+
+<li>
+<i class="fa-solid fa-check text-lime-400 mr-2"></i>
+En la salvación por gracia mediante la fe.
+</li>
+
+<li>
+<i class="fa-solid fa-check text-lime-400 mr-2"></i>
+En el poder del Espíritu Santo.
+</li>
+
+</ul>
+
+</div>
+
+
+
+<div class="rounded-3xl bg-white/5 border border-white/10 p-9">
+
+<h3 class="font-display text-2xl font-semibold mb-4">
+
+Dios te está esperando
+
+</h3>
+
+
+<p class="text-slate-300 leading-relaxed">
+
+No importa lo que hayas hecho, de dónde vengas
+o cuánto tiempo hayas estado alejado de Dios.
+
+Él te ama y te llama a acercarte a Él.
+
+Envió a su Hijo Jesucristo para morir por nosotros
+y darnos vida eterna.
+
+</p>
+
+
+<div class="mt-8 border-l-2 border-lime-400 pl-5">
+
+<p class="font-display text-xl italic">
+
+“Porque de tal manera amó Dios al mundo,
+que ha dado a su Hijo unigénito...”
+
+</p>
+
+<p class="mt-3 text-lime-300 font-semibold text-sm">
+
+JUAN 3:16
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+
+<div class="mt-14 text-center">
+
+<p class="font-display text-2xl sm:text-3xl italic">
+
+“Ven tal como eres. Hay un lugar para ti.”
+
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- =========================
+     REUNIONES
+========================= -->
+
+<section
+id="reuniones"
+class="py-24 lg:py-32 bg-white"
+>
+
+<div class="max-w-7xl mx-auto px-5 sm:px-8">
+
+
+<div class="max-w-2xl mb-14">
+
+<p class="text-[#4f8b2d] font-bold uppercase tracking-[.2em] text-sm mb-4">
+
+NUESTROS SERVICIOS
+
+</p>
+
+
+<h2 class="font-display text-4xl sm:text-5xl lg:text-6xl">
+
+Hay un lugar para ti cada semana.
+
+</h2>
+
+
+<p class="mt-6 text-lg text-slate-500 leading-relaxed">
+
+Todos están invitados a compartir un tiempo de oración,
+adoración y comunión con nosotros.
+
+</p>
+
+</div>
+
+
+
+<div class="grid md:grid-cols-2 gap-6">
+
+
+<!-- VIERNES -->
+
+<article class="card-hover group rounded-3xl border
+border-slate-200 bg-white p-8
+hover:-translate-y-2 hover:shadow-glow
+hover:bg-slate-900">
+
+<div class="w-14 h-14 rounded-2xl bg-green-50
+text-[#4f8b2d] flex items-center justify-center
+text-xl mb-7">
+
+<i class="fa-solid fa-hands-praying"></i>
+
+</div>
+
+
+<h3 class="font-display text-xl font-semibold
+text-slate-900 group-hover:text-white">
+
+Servicio de oración
+
+</h3>
+
+
+<p class="mt-3 text-slate-500 group-hover:text-slate-300
+leading-relaxed text-[15px]">
+
+Un tiempo para buscar a Dios, presentar nuestras
+peticiones y fortalecer nuestra fe.
+
+</p>
+
+
+<div class="mt-6 text-sm font-semibold
+text-[#4f8b2d] group-hover:text-lime-400">
+
+Viernes · 19:00 h
+
+</div>
+
+</article>
+
+
+
+<!-- DOMINGO -->
+
+<article class="card-hover group rounded-3xl border
+border-slate-200 bg-white p-8
+hover:-translate-y-2 hover:shadow-glow
+hover:bg-slate-900">
+
+<div class="w-14 h-14 rounded-2xl bg-green-50
+text-[#4f8b2d] flex items-center justify-center
+text-xl mb-7">
+
+<i class="fa-solid fa-church"></i>
+
+</div>
+
+
+<h3 class="font-display text-xl font-semibold
+text-slate-900 group-hover:text-white">
+
+Culto de adoración
+
+</h3>
+
+
+<p class="mt-3 text-slate-500 group-hover:text-slate-300
+leading-relaxed text-[15px]">
+
+Un tiempo para alabar a Dios, escuchar su Palabra
+y compartir como familia de fe.
+
+</p>
+
+
+<div class="mt-6 text-sm font-semibold
+text-[#4f8b2d] group-hover:text-lime-400">
+
+Domingos · 18:00 h
+
+</div>
+
+</article>
+
+</div>
+
+
+
+<div class="mt-10 rounded-3xl bg-slate-50
+border border-slate-100 p-8 text-center">
+
+<p class="font-display text-2xl text-slate-900">
+
+Todos son bienvenidos.
+
+</p>
+
+<p class="mt-3 text-slate-500">
+
+No necesitas conocer a nadie ni tener experiencia
+previa en una iglesia. Ven tal como eres.
+
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- =========================
+     TESTIMONIOS
+========================= -->
+
+<section
+id="testimonios"
+class="py-24 lg:py-32 bg-slate-50"
+>
+
+<div class="max-w-7xl mx-auto px-5 sm:px-8">
+
+
+<div class="text-center max-w-2xl mx-auto mb-16">
+
+<p class="text-[#4f8b2d] font-bold uppercase tracking-[.2em] text-sm mb-4">
+
+TESTIMONIOS
+
+</p>
+
+
+<h2 class="font-display text-4xl sm:text-5xl">
+
+Dios transforma vidas.
+
+</h2>
+
+
+<p class="mt-5 text-lg text-slate-500">
+
+Historias de personas que quieren compartir
+lo que Dios ha hecho en sus vidas.
+
+</p>
+
+</div>
+
+
+
+<div class="grid lg:grid-cols-3 gap-6">
+
+
+<!-- CARLOS -->
+
+<article class="rounded-3xl bg-white
+border border-slate-100 p-8
+hover:shadow-soft transition flex flex-col">
+
+<div class="text-6xl text-[#4f8b2d]/30">
+“
+</div>
+
+
+<p class="text-slate-700 leading-relaxed text-[15px] flex-1">
+
+Sufrí un derrame cerebral y los médicos dijeron que era
+muy difícil que volviera a despertar. También aseguraban
+que probablemente nunca volvería a caminar ni a hablar.
+
+Mi familia nunca dejó de orar, y Dios hizo un milagro
+en mi vida. Hoy camino, hablo y puedo contar lo que
+Cristo hizo por mí.
+
+¡Toda la gloria sea para Dios!
+
+</p>
+
+
+<div class="flex items-center gap-3 mt-8 pt-6
+border-t border-slate-200">
+
+<div class="w-11 h-11 rounded-full
+bg-[#4f8b2d] flex items-center justify-center
+text-white font-bold">
+
+C
+
+</div>
+
+<div>
+
+<p class="font-semibold text-sm">
+Carlos
+</p>
+
+<p class="text-xs text-slate-500">
+Testimonio de fe
+</p>
+
+</div>
+
+</div>
+
+</article>
+
+
+
+<!-- MARÍA -->
+
+<article class="rounded-3xl bg-white
+border border-slate-100 p-8
+hover:shadow-soft transition flex flex-col">
+
+<div class="text-6xl text-teal-400/40">
+“
+</div>
+
+
+<p class="text-slate-700 leading-relaxed text-[15px] flex-1">
+
+Durante años padecí una grave enfermedad en los riñones.
+Los médicos me daban pocas esperanzas, pero mi iglesia
+y mi familia nunca dejaron de orar.
+
+Hoy estoy llena de vida, puedo cantar con alegría
+y disfrutar de cada día que Dios me regala.
+
+Él sigue haciendo milagros.
+
+</p>
+
+
+<div class="flex items-center gap-3 mt-8 pt-6
+border-t border-slate-200">
+
+<div class="w-11 h-11 rounded-full
+bg-teal-600 flex items-center justify-center
+text-white font-bold">
+
+M
+
+</div>
+
+<div>
+
+<p class="font-semibold text-sm">
+María
+</p>
+
+<p class="text-xs text-slate-500">
+Testimonio de fe
+</p>
+
+</div>
+
+</div>
+
+</article>
+
+
+
+<!-- DAVID -->
+
+<article class="rounded-3xl bg-white
+border border-slate-100 p-8
+hover:shadow-soft transition flex flex-col">
+
+<div class="text-6xl text-amber-400/50">
+“
+</div>
+
+
+<p class="text-slate-700 leading-relaxed text-[15px] flex-1">
+
+Vivía sin esperanza y mi vida estaba llena de problemas.
+
+Un día conocí a Jesucristo y entendí que Él me amaba
+tal como era.
+
+Desde entonces, Dios transformó mi corazón, restauró
+mi vida y me dio una paz que nunca había sentido.
+
+Hoy vivo para darle gracias y compartir Su amor
+con los demás.
+
+</p>
+
+
+<div class="flex items-center gap-3 mt-8 pt-6
+border-t border-slate-200">
+
+<div class="w-11 h-11 rounded-full
+bg-amber-500 flex items-center justify-center
+text-white font-bold">
+
+D
+
+</div>
+
+<div>
+
+<p class="font-semibold text-sm">
+David
+</p>
+
+<p class="text-xs text-slate-500">
+Testimonio de fe
+</p>
+
+</div>
+
+</div>
+
+</article>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- =========================
+     UBICACIÓN
+========================= -->
+
+<section
+id="ubicacion"
+class="py-24 lg:py-32 bg-slate-950 text-white"
+>
+
+<div class="max-w-7xl mx-auto px-5 sm:px-8">
+
+
+<div class="max-w-2xl mb-14">
+
+<p class="text-lime-400 font-bold uppercase tracking-[.2em] text-sm mb-4">
+
+VISÍTANOS
+
+</p>
+
+
+<h2 class="font-display text-4xl sm:text-5xl">
+
+Te esperamos con las puertas abiertas.
+
+</h2>
+
+
+<p class="mt-5 text-slate-400 text-lg">
+
+Nuestra iglesia está en Usera, Madrid.
+
+Ven tal como eres.
+
+</p>
+
+</div>
+
+
+
+<div class="grid lg:grid-cols-2 gap-6">
+
+
+<div class="rounded-3xl bg-white/5
+border border-white/10 p-8">
+
+<div class="w-12 h-12 rounded-2xl bg-white/5
+text-lime-400 flex items-center justify-center mb-6">
+
+<i class="fa-solid fa-location-dot"></i>
+
+</div>
+
+
+<h3 class="font-display text-2xl mb-4">
+
+Madrid, España
+
+</h3>
+
+
+<p class="text-slate-300 leading-relaxed">
+
+Calle La Verja, 36<br>
+Usera, Madrid<br>
+España
+
+</p>
+
+
+<a
+href="https://www.google.com/maps/dir/?api=1&destination=Calle+La+Verja+36,+Usera,+Madrid,+España"
+target="_blank"
+rel="noopener"
+class="inline-flex items-center gap-2 mt-6
+text-lime-400 font-semibold hover:text-white transition"
+>
+
+Cómo llegar
+
+<i class="fa-solid fa-arrow-right"></i>
+
+</a>
+
+
+<a
+href="tel:+34602367351"
+class="block mt-4 text-slate-300 hover:text-lime-400 transition"
+>
+
+<i class="fa-solid fa-phone mr-2"></i>
+
++34 602 36 73 51
+
+</a>
+
+</div>
+
+
+
+<div class="rounded-3xl bg-white/5
+border border-white/10 p-8">
+
+<h3 class="font-display text-2xl mb-4">
+
+Horarios
+
+</h3>
+
+
+<div class="space-y-6">
+
+
+<div>
+
+<p class="text-lime-400 font-semibold">
+Viernes
+</p>
+
+<p class="text-slate-300 mt-1">
+19:00 h — Servicio de oración
+</p>
+
+</div>
+
+
+<div>
+
+<p class="text-lime-400 font-semibold">
+Domingos
+</p>
+
+<p class="text-slate-300 mt-1">
+18:00 h — Culto de adoración
+</p>
+
+</div>
+
+
+</div>
+
+</div>
+
+</div>
+
+
+
+<div class="mt-8 rounded-3xl overflow-hidden
+border border-white/10 shadow-2xl">
+
+<iframe
+title="Ubicación del Ministerio Reino de Cristo Internacional"
+src="https://www.google.com/maps?q=Calle+La+Verja+36,+Usera,+Madrid,+España&output=embed"
+width="100%"
+height="430"
+style="border:0"
+allowfullscreen=""
+loading="lazy">
+</iframe>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- =========================
+     CTA
+========================= -->
+
+<section
+class="py-20 sm:py-24
+bg-gradient-to-br from-[#4f8b2d]
+via-emerald-700
+to-teal-800
+text-center text-white"
+>
+
+<div class="max-w-3xl mx-auto px-6">
+
+
+<h2 class="font-display text-3xl sm:text-4xl">
+
+Dios te está esperando.
+
+</h2>
+
+
+<p class="mt-4 text-white/90 text-lg leading-relaxed">
+
+No importa lo que hayas hecho.
+No importa de dónde vengas.
+
+Dios te ama.
+
+Ven tal como eres y descubre el amor y la esperanza
+que hay en Jesucristo.
+
+</p>
+
+
+<a
+href="tel:+34602367351"
+class="inline-block mt-8 bg-white
+text-[#315f20] font-bold px-8 py-4
+rounded-full hover:scale-105 transition"
+>
+
+Contáctanos
+
+</a>
+
+</div>
+
+</section>
+
+
+
+<!-- =========================
+     FOOTER
+========================= -->
+
+<footer
+class="bg-slate-950 text-white py-14"
+>
+
+<div class="max-w-7xl mx-auto px-5 sm:px-8">
+
+
+<div class="grid md:grid-cols-3 gap-10">
+
+
+<div>
+
+<img
+src="LOGO_AQUI.png"
+alt="Ministerio Reino de Cristo Internacional"
+class="w-20 h-20 object-contain"
+>
+
+
+<p class="font-display text-xl mt-4">
+
+Ministerio Reino de Cristo Internacional
+
+</p>
+
+
+<p class="text-slate-400 text-sm leading-relaxed mt-4">
+
+Una iglesia cristiana protestante evangélica
+donde todos son bienvenidos.
+
+</p>
+
+</div>
+
+
+
+<div>
+
+<h3 class="font-display text-xl mb-4">
+Madrid
+</h3>
+
+
+<p class="text-slate-400 text-sm leading-relaxed">
+
+Calle La Verja, 36<br>
+Usera, Madrid
+
+</p>
+
+
+<a
+href="tel:+34602367351"
+class="inline-block mt-3 text-slate-300 hover:text-lime-400"
+>
+
++34 602 36 73 51
+
+</a>
+
+</div>
+
+
+
+<div>
+
+<h3 class="font-display text-xl mb-4">
+Reuniones
+</h3>
+
+
+<p class="text-slate-400 text-sm">
+
+Viernes · 19:00 h
+— Servicio de oración
+
+</p>
+
+
+<p class="text-slate-400 text-sm mt-2">
+
+Domingos · 18:00 h
+— Culto de adoración
+
+</p>
+
+</div>
+
+</div>
+
+
+
+<div class="mt-12 pt-7 border-t border-white/10
+text-center text-slate-500 text-xs">
+
+
+<p>
+
+“Porque de tal manera amó Dios al mundo,
+que ha dado a su Hijo unigénito...”
+
+— Juan 3:16
+
+</p>
+
+
+<p class="mt-3">
+
+© Ministerio Reino de Cristo Internacional.
+Todos los derechos reservados.
+
+</p>
+
+</div>
+
+</div>
+
+</footer>
+
+
+</body>
+</html>
